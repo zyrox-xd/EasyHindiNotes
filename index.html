@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Hindi Notes (Marks-Wise) - by Shaarif & Zomaxa</title>
+    
+    <!-- SEO Meta Description -->
+    <meta name="description" content="Easy Hindi Notes — All your Hindi Q&A, summaries, essays, and notes organized marks-wise (2 Marks, 6 Marks, 10 Marks). Created by Shaarif and Zomaxa Agency.">
+
+    <!-- Google Fonts: Karma and Noto Sans Devanagari -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karma:wght@400;500;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Karma', serif;
+            background-color: #f8faff;
+            color: #1e293b;
+        }
+        
+        [lang="hi"] {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            letter-spacing: 0.5px;
+        }
+        
+        :root {
+            --accent-blue: #3B82F6;
+            --accent-saffron: #F97316;
+        }
+        
+        /* Hide Hinglish and English Translations by default */
+        [data-lang="hi-ro"],
+        .english-translation {
+            display: none;
+        }
+        
+        /* Page Navigation */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        /* Collapsible Section Styles */
+        details.marks-section > summary {
+            list-style: none;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border-bottom: 1px solid #e5e7eb;
+            transition: background-color 0.2s;
+        }
+        details.marks-section > summary:hover {
+            background-color: #f9fafb;
+        }
+        details.marks-section[open] > summary {
+            background-color: #f9fafb;
+        }
+        details.marks-section > summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        /* Q&A Block with Listen/Translate Buttons */
+        .qna-block {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .qna-block:last-child {
+            border-bottom: none;
+        }
+        .qna-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .qna-text {
+            flex-grow: 1;
+        }
+        /* Style for the new translation button */
+        .action-btn {
+            flex-shrink: 0;
+            border: none;
+            border-radius: 50%;
+            width: 2.5rem; /* 40px */
+            height: 2.5rem; /* 40px */
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .speak-btn {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .speak-btn:hover {
+            background-color: #2563EB;
+        }
+        .speak-btn:disabled {
+            background-color: #9ca3af;
+        }
+        .translate-btn {
+            background-color: #f1f5f9; /* Light gray */
+            color: #334155; /* Dark gray */
+        }
+        .translate-btn:hover {
+            background-color: #e2e8f0;
+        }
+        .translate-btn.loading {
+            cursor: not-allowed;
+        }
+        
+        /* English Translation Box */
+        .english-translation {
+            background-color: #f8fafc; /* Very light blue/gray */
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            font-family: 'Karma', serif;
+            font-size: 0.95rem;
+            color: #334155;
+            animation: slideDown 0.3s ease-in-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Spinner */
+        .spinner {
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        .spinner-dark {
+             border-color: rgba(0,0,0,0.1);
+             border-top-color: var(--accent-blue);
+             animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* General Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .btn-blue {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .btn-blue:hover {
+            background-color: #2563EB;
+        }
+    </style>
+</head>
+<body class="bg-bg-light text-text-dark">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-accent-blue cursor-pointer" onclick="showPage('page-home')">
+                        <span lang="hi" class="text-accent-saffron">🪔</span> Easy Hindi Notes
+                    </span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex md:space-x-2">
+                    <a href="#home" onclick="showPage('page-home')" class="nav-link text-gray-700 hover:text-accent-blue px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                    <a href="#sec1" onclick="showPage('page-sec1')" class="nav-link text-gray-700 hover:text-accent-blue px-3 py-2 rounded-md text-sm font-medium">Section I (2 Marks)</a>
+                    <a href="#sec2" onclick="showPage('page-sec2')" class="nav-link text-gray-700 hover:text-accent-blue px-3 py-2 rounded-md text-sm font-medium">Section II (6 Marks)</a>
+                    <a href="#sec3" onclick="showPage('page-sec3')" class="nav-link text-gray-700 hover:text-accent-blue px-3 py-2 rounded-md text-sm font-medium">Section III (10 Marks)</a>
+                    <a href="#tools" onclick="showPage('page-tools')" class="nav-link text-gray-700 hover:text-accent-blue px-3 py-2 rounded-md text-sm font-medium">Study Tools</a>
+                </div>
+
+                <!-- Hinglish Toggle -->
+                <div class="hidden md:block">
+                     <button id="translateBtn" class="btn btn-blue btn-sm">Switch to Hinglish</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Dropdown) -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" onclick="showPage('page-home', true)" class="nav-link text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#sec1" onclick="showPage('page-sec1', true)" class="nav-link text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Section I (2 Marks)</a>
+                <a href="#sec2" onclick="showPage('page-sec2', true)" class="nav-link text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Section II (6 Marks)</a>
+                <a href="#sec3" onclick="showPage('page-sec3', true)" class="nav-link text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Section III (10 Marks)</a>
+                <a href="#tools" onclick="showPage('page-tools', true)" class="nav-link text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Study Tools</a>
+                <div class="p-3">
+                    <button id="translateBtnMobile" class="btn btn-blue w-full">Switch to Hinglish</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- ======================= -->
+        <!-- 🏠 Page 1: Home          -->
+        <!-- ======================= -->
+        <div id="page-home" class="page active">
+            <!-- Hero Section -->
+            <section class="text-center py-12 md:py-16">
+                <h1 class="text-4xl md:text-5xl font-bold text-text-dark">
+                    <span data-lang="hi">Easy Hindi Notes में आपका स्वागत है</span>
+                    <span data-lang="hi-ro">Easy Hindi Notes mein Aapka Swagat Hai</span>
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-600">
+                    <span data-lang="hi">आपके सभी हिंदी नोट्स, प्रश्न-उत्तर और सारांश, सब एक जगह।</span>
+                    <span data-lang="hi-ro">Aapke sabhi Hindi notes, prashna-uttar aur saaransh, sab ek jagah.</span>
+                </p>
+                <div class="mt-8">
+                    <button class="btn btn-blue btn-lg" onclick="showPage('page-sec1')">
+                        <span data-lang="hi">पढ़ाई शुरू करें (2 अंक)</span>
+                        <span data-lang="hi-ro">Padhaai Shuru Karein (2 Marks)</span>
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Featured Cards Section -->
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="card p-6 flex flex-col items-center text-center cursor-pointer" onclick="showPage('page-sec1')">
+                    <div class="text-3xl font-bold text-accent-blue">2</div>
+                    <h3 class="mt-2 text-xl font-bold">
+                        <span data-lang="hi">अंक के प्रश्न</span>
+                        <span data-lang="hi-ro">Ank ke Prashna</span>
+                    </h3>
+                    <p class="mt-2 text-gray-500">
+                        <span data-lang="hi">सभी पाठों से त्वरित प्रश्न और उत्तर।</span>
+                        <span data-lang="hi-ro">Sabhi paathon se tvarit prashna aur uttar.</span>
+                    </p>
+                </div>
+                
+                <div class="card p-6 flex flex-col items-center text-center cursor-pointer" onclick="showPage('page-sec2')">
+                    <div class="text-3xl font-bold text-accent-saffron">6</div>
+                    <h3 class="mt-2 text-xl font-bold">
+                        <span data-lang="hi">अंक के प्रश्न</span>
+                        <span data-lang="hi-ro">Ank ke Prashna</span>
+                    </h3>
+                    <p class="mt-2 text-gray-500">
+                        <span data-lang="hi">पाठ सारांश, व्याख्या और अनुवाद।</span>
+                        <span data-lang="hi-ro">Paath saaransh, vyakhya aur anuvaad.</span>
+                    </p>
+                </div>
+
+                <div class="card p-6 flex flex-col items-center text-center cursor-pointer" onclick="showPage('page-sec3')">
+                    <div class="text-3xl font-bold text-accent-blue">10</div>
+                    <h3 class="mt-2 text-xl font-bold">
+                        <span data-lang="hi">अंक के प्रश्न</span>
+                        <span data-lang="hi-ro">Ank ke Prashna</span>
+                    </h3>
+                    <p class="mt-2 text-gray-500">
+                        <span data-lang="hi">निबंध, औपचारिक पत्र और संक्षेपण।</span>
+                        <span data-lang="hi-ro">Nibandh, aupachaarik patra aur sankshepan.</span>
+                    </p>
+                </div>
+
+                <div class="card p-6 flex flex-col items-center text-center cursor-pointer" onclick="showPage('page-tools')">
+                    <svg class="w-10 h-10 text-accent-saffron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M12 21v-1m0-17a9 9 0 110 18 9 9 0 010-18z" /></svg>
+                    <h3 class="mt-2 text-xl font-bold">
+                        <span data-lang="hi">स्टडी टूल्स</span>
+                        <span data-lang="hi-ro">Study Tools</span>
+                    </h3>
+                    <p class="mt-2 text-gray-500">
+                        <span data-lang="hi">AI चैट, डिक्शनरी और क्विज़।</span>
+                        <span data-lang="hi-ro">AI Chat, Dictionary aur Quiz.</span>
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ======================= -->
+        <!-- 📝 Page 2: Section I (2 Marks) -->
+        <!-- ======================= -->
+        <div id="page-sec1" class="page">
+            <h1 class="text-3xl md:text-4xl font-bold mb-6">
+                <span data-lang="hi">खंड I: २ अंक के प्रश्न</span>
+                <span data-lang="hi-ro">Khand I: 2 Ank ke Prashna</span>
+            </h1>
+            
+            <div class="card overflow-hidden">
+                <!-- Lesson 1 -->
+                <details class="marks-section" open>
+                    <summary>
+                        <span data-lang="hi">पाठ-1: भाषा का महत्व</span>
+                        <span data-lang="hi-ro">Paath-1: Bhasha ka Mahatva</span>
+                    </summary>
+                    <div class="divide-y divide-gray-100">
+                        <!-- Q&A 1.1 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: भाषा का महत्व इस पाठ के लेखक का नाम लिखिए और मनुष्य किससे भिन्न है?</span><span data-lang="hi-ro">Prashna: Bhasha ka Mahatva is paath ke lekhak ka naam likhiye aur manushya kisse bhinn hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: हरदेव बाहरी और पशु पक्षियों से</span><span data-lang="hi-ro">Uttar: Hardev Bahri aur pashu pakshiyon se</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.2 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: मनुष्य किस तरह का प्राणी है और किसका मन नहीं होता?</span><span data-lang="hi-ro">Prashna: Manushya kis tarah ka praani hai aur kiska mann nahi hota?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: मननशील और पशु पक्षियों का मन</span><span data-lang="hi-ro">Uttar: Manansheel aur pashu pakshiyon ka mann</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.3 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: युग युग से कौन खाने के कण को जमा कर रहा है और किसके बिना विकास संभव नहीं?</span><span data-lang="hi-ro">Prashna: Yug yug se kaun khaane ke kan ko jama kar raha hai aur kiske bina vikaas sambhav nahi?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: चींटी और भाषा के बिना</span><span data-lang="hi-ro">Uttar: Cheentee aur bhasha ke bina</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.4 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: धर्म के कोई दो लक्षण लिखिए?</span><span data-lang="hi-ro">Prashna: Dharm ke koi do lakshan likhiye?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: चोरी न करना, क्षमा करना, झूठ नहीं बोलना आदि</span><span data-lang="hi-ro">Uttar: Chori na karna, kshama karna, jhooth nahi bolna aadi</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.5 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: इस्कीमो की भाषा में कौन से शब्द ज्यादा है?</span><span data-lang="hi-ro">Prashna: Eskimo ki bhasha mein kaun se shabd jyaada hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: मछली, बर्फ आदि</span><span data-lang="hi-ro">Uttar: Machhli, barf aadi</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.6 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: अरबी और संस्कृत में किन जानवरों का उल्लेख है?</span><span data-lang="hi-ro">Prashna: Arabi aur Sanskrit mein kin jaanwaron ka ullekh hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: ऊँट और गाय</span><span data-lang="hi-ro">Uttar: Oont aur gaay</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.7 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: भाषा नहीं होती तो इंसान कहाँ रहते और भाषा किसमें जान फूंकती है?</span><span data-lang="hi-ro">Prashna: Bhasha nahi hoti toh insaan kahaan rehte aur bhasha kismein jaan phoonkti hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: गुफाओं में और मुर्दा दिल में जान</span><span data-lang="hi-ro">Uttar: Gufaaon mein aur murda dil mein jaan</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.8 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: भाषा किसका साधन है?</span><span data-lang="hi-ro">Prashna: Bhasha kiska saadhan hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: विचारों और भावों को प्रकट करने का साधन</span><span data-lang="hi-ro">Uttar: Vichaaron aur bhaavon ko prakat karne ka saadhan</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.9 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: नेता किन्हें प्रेरित करते है और कौन दिलों को जोडता है?</span><span data-lang="hi-ro">Prashna: Neta kinhein prerit karte hai aur kaun dilon ko jodta hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: जनता को प्रभावित और भाषा दिलों को जोडता</span><span data-lang="hi-ro">Uttar: Janta ko prabhaavit aur bhasha dilon ko jodta</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.10 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: सेनापति किन्हें प्रेरित करता है और किस भाषा में?</span><span data-lang="hi-ro">Prashna: Senapati kinhein prerit karta hai aur kis bhasha mein?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: सिपाहियों को प्रेरित और ओजपूर्ण भाषा से</span><span data-lang="hi-ro">Uttar: Sipahiyon ko prerit aur ojpoorna bhasha se</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.11 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: पालि भाषा किन-किन देशों को जोडती है?</span><span data-lang="hi-ro">Prashna: Pali bhasha kin-kin deshon ko jodti hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: भारत, चीनी, जापान आदि</span><span data-lang="hi-ro">Uttar: Bharat, Cheeni, Japan aadi</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.12 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: लेखक ने किसे जादू कहा है और किसे संगीत पसंद है?</span><span data-lang="hi-ro">Prashna: Lekhak ne kise jaadu kaha hai aur kise sangeet pasand hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: भाषा को कहा है और हिरण को संगीत</span><span data-lang="hi-ro">Uttar: Bhasha ko kaha hai aur hiran ko sangeet</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.13 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: कैसी बातें दिलों को जोडती है और कैसी बातें दिलों को तोडती है?</span><span data-lang="hi-ro">Prashna: Kaisi baatein dilon ko jodti hai aur kaisi baatein dilon ko todti hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: मधुर बातें जोडती और कटु या कर्कश बातें तोडती</span><span data-lang="hi-ro">Uttar: Madhur baatein jodti aur katu ya karkash baatein todti</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.14 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: किसी शिक्षित व्यक्ति की पहचान कैसे होती है?</span><span data-lang="hi-ro">Prashna: Kisi shikshit vyakti ki pehchaan kaise hoti hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: भाषा का उच्चारण, शब्द चयन, मुहावरों का प्रयोग, व्यवहार</span><span data-lang="hi-ro">Uttar: Bhasha ka uchchaaran, shabd chayan, muhaavaron ka prayog, vyavhaar</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 1.15 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: कौन अपनी मीठी बातों से किसे प्रभावित करता है?</span><span data-lang="hi-ro">Prashna: Kaun apni meethi baaton se kise prabhaavit karta hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: व्यापारी और ग्राहक को</span><span data-lang="hi-ro">Uttar: Vyaapaari aur graahak ko</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                    </div>
+                </details>
+                
+                <!-- Lesson 2 -->
+                <details class="marks-section">
+                    <summary>
+                        <span data-lang="hi">पाठ-2: चीफ की दावत</span>
+                        <span data-lang="hi-ro">Paath-2: Chief ki Daawat</span>
+                    </summary>
+                    <div class="divide-y divide-gray-100">
+                        <!-- Q&A 2.1 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: चीफ दावत कहानी के लेखक का नाम लिखिए और किसे दावत पर बुलाया गया?</span><span data-lang="hi-ro">Prashna: Chief Daawat kahani ke lekhak ka naam likhiye aur kise daawat par bulaya gaya?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: भीष्म सहानी और चीफ</span><span data-lang="hi-ro">Uttar: Bhisham Sahani aur Chief</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.2 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: ध्वनी के प्रयोग द्वारा किन पक्षियों के बीच हमें फर्क पता चलता है?</span><span data-lang="hi-ro">Prashna: Dhwani ke prayog dwara kin pakshiyon ke beech humein fark pata chalta hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: कोयल और कौआ</span><span data-lang="hi-ro">Uttar: Koyal aur Kaua</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.3 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: किन्हें पसीना पोंछने की फुरसत नहीं थी?</span><span data-lang="hi-ro">Prashna: Kinhein paseena ponchhne ki fursat nahi thi?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: शामनाथ और उनकी पत्नी को</span><span data-lang="hi-ro">Uttar: Shamnath aur unki patni ko</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.4 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: मेहमान कितने बजे आनेवाले थे और समस्या का कारण कौन है?</span><span data-lang="hi-ro">Prashna: Mehmaan kitne baje aanewaale the aur samasya ka kaaran kaun hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: आठ और माँ</span><span data-lang="hi-ro">Uttar: Aath aur Maa</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.5 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: कहानी के नायक का नाम लिखिए और माँ के प्रति उसका व्यवहार कैसा था?</span><span data-lang="hi-ro">Prashna: Kahani ke nayak ka naam likhiye aur Maa ke prati uska vyavhaar kaisa tha?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: शामनाथ और क्रूर था</span><span data-lang="hi-ro">Uttar: Shamnath aur kroor tha</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.6 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: पत्नी ने माँ को कहाँ भेजने का सुझाव दिया और वह माँ की क्या लगती थी?</span><span data-lang="hi-ro">Prashna: Patni ne Maa ko kahaan bhejane ka sujhaav diya aur vah Maa ki kya lagti thi?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: पिछवाडे के घर और वह माँ की सहेली</span><span data-lang="hi-ro">Uttar: Pichhwaade ke ghar aur vah Maa ki saheli</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.7 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: कौन माला जप रहा है और उसने किस रंग का वस्त्र पहना?</span><span data-lang="hi-ro">Prashna: Kaun maala jap raha hai aur usne kis rang ka vastra pehna?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: माँ और सफेद रंग</span><span data-lang="hi-ro">Uttar: Maa aur safed rang</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.8 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: माँ ने चूडियां क्यों भेज दी और इससे उसका किसका फायदा हुआ?</span><span data-lang="hi-ro">Prashna: Maa ne choodiyaan kyon bhej di aur isse uska kiska faayda hua?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: बेटे के पढाई के लिए और बेटे को फायदा</span><span data-lang="hi-ro">Uttar: Bete ke padhaai ke liye aur bete ko faayda</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.9 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: चीफ कहाँ से थे और माँ को किस भाषा से डर था?</span><span data-lang="hi-ro">Prashna: Chief kahaan se the aur Maa ko kis bhasha se dar tha?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: अमेरिकी और अंग्रेजी</span><span data-lang="hi-ro">Uttar: Ameriki aur Angrezi</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.10 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: चीफ की पत्नी ने क्या पहना था और उसके गले में कौनसा हार था?</span><span data-lang="hi-ro">Prashna: Chief ki patni ne kya pehna tha aur uske gale mein kaunsa haar tha?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: काला गाउन और सफेद मोतियों का हार</span><span data-lang="hi-ro">Uttar: Kaala gown aur safed motiyon ka haar</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.11 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: चीफ को माँ की कौनसी कला पसंद आयी और उसने किसे नमस्ते बोला?</span><span data-lang="hi-ro">Prashna: Chief ko Maa ki kaunsi kala pasand aayi aur usne kise namaste bola?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: माँ की फुलकारी पसंद आयी और माँ को नमस्ते</span><span data-lang="hi-ro">Uttar: Maa ki Phulkari pasand aayi aur Maa ko Namaste</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.12 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: पंजाबीयों के घरों में क्या-क्या बनता है?</span><span data-lang="hi-ro">Prashna: Punjabiyon ke gharon mein kya-kya banta hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: गुडिया और फलकारीयां</span><span data-lang="hi-ro">Uttar: Gudiya aur Phulkariyan</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A 2.13 -->
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: मेहमान कब गये और कौन अपने कमरे में रो रहा था?</span><span data-lang="hi-ro">Prashna: Mehmaan kab gaye aur kaun apne kamre mein ro raha tha?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: आधी रात को और मां रो रही थी</span><span data-lang="hi-ro">Uttar: Aadhi raat ko aur maa ro rahi thi</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Lesson 3 -->
+                <details class="marks-section">
+                    <summary>
+                        <span data-lang="hi">पाठ-3: प्रेमियों की वापसी</span>
+                        <span data-lang="hi-ro">Paath-3: Premiyon ki Vaapsi</span>
+                    </summary>
+                     <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: प्रेमियों की वापसी इस पाठ के लेखक का नाम लिखिए और प्रेमि क्या करने वाले है?</span><span data-lang="hi-ro">Prashna: Premiyon ki Vaapsi is paath ke lekhak ka naam likhiye aur premi kya karne waale hain?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: हरिशंकर परसाई और आत्महत्या</span><span data-lang="hi-ro">Uttar: Harishankar Parsai aur aatmahatya</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                    <!-- Q&A 3.2 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: प्रेमियों की वापसी पाठ के प्रेमियों के नाम लिखिए?</span><span data-lang="hi-ro">Prashna: Premiyon ki Vaapsi paath ke premiyon ke naam likhiye?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: प्रेमेंन्द्र और रंजना</span><span data-lang="hi-ro">Uttar: Premendra aur Ranjana</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                    <!-- Q&A 3.3 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: हेडमास्टर और हेडमास्टरनी का नाम लिखिए?</span><span data-lang="hi-ro">Prashna: Headmaster aur Headmistress ka naam likhiye?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: मिस्टर सक्सेना और मिस्टर शर्मा</span><span data-lang="hi-ro">Uttar: Mr. Saxena aur Mrs. Sharma</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                    <!-- Q&A 3.4 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: प्रेमि और प्रेमिका को एक दूसरे की किन आदतों से परशान है?</span><span data-lang="hi-ro">Prashna: Premi aur premika ko ek doosre ki kin aadaton se pareshaan hai?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: प्रेमेन्द्र का दांतों से नाखून काटना और रंजना का जम्हाई लेना</span><span data-lang="hi-ro">Uttar: Premendra ka daanton se naakhoon kaatna aur Ranjana ka jamhaai lena</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                    <!-- Q&A 3.5 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: पाकशास्त्र की प्रोफसर का नाम लिखिए और वह कब मरी?</span><span data-lang="hi-ro">Prashna: Paak-shaastra ki professor ka naam likhiye aur vah kab mari?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: मिस सूद और पिछले महीने</span><span data-lang="hi-ro">Uttar: Miss Sood aur pichhle mahine</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                    <!-- Q&A 3.6 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: हेडमास्टर और हेडमास्टरनी के मरने का कारण क्या है?</span><span data-lang="hi-ro">Prashna: Headmaster aur Headmistress ke marne ka kaaran kya hai?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: हेडमास्टर हार्टफेल से मरा और हेडमास्टरनी निमोनिया</span><span data-lang="hi-ro">Uttar: Headmaster heart failure se mara aur Headmistress pneumonia se</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                    <!-- Q&A 3.7 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: कार दुर्घटना में कौन मरा और उसके पिता ने किसको संस्पेड करवाया था?</span><span data-lang="hi-ro">Prashna: Car durghatna mein kaun mara aur uske pita ne kisko suspend karwaaya tha?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: विनोद और रंजना के पिता</span><span data-lang="hi-ro">Uttar: Vinod aur Ranjana ke pita</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                    <!-- Q&A 3.8 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: रंजना ने किसे प्रेम किया और वह किससे शादी करना चाहती थी?</span><span data-lang="hi-ro">Prashna: Ranjana ne kise prem kiya aur vah kisse shaadi karna chaahti thi?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: प्रेमेन्द्र से प्रेम और विनोद से शादी</span><span data-lang="hi-ro">Uttar: Premendra se prem aur Vinod se shaadi</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                    <!-- Q&A 3.9 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: प्रेमेन्द्र इमारत के किस मंजिल से कूदा और वह किसपर गिरा?</span><span data-lang="hi-ro">Prashna: Premendra imaarat ke kis manzil se kooda aur vah kispar gira?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: पांचवी मंझिल से गिरा और पुलिस पर गिरा</span><span data-lang="hi-ro">Uttar: Paanchvi manzil se gira aur police par gira</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                    <!-- Q&A 3.10 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: संचालक मरने के लिए किस देश को कौन से देश को गए?</span><span data-lang="hi-ro">Prashna: Sanchaalak marne ke liye kis desh ko kaun se desh ko gaye?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: भारत को छोडकर लंदन गए</span><span data-lang="hi-ro">Uttar: Bharat ko chhodkar London gaye</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                    <!-- Q&A 3.11 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium"><span data-lang="hi">प्रश्न: किसने प्रेमेन्द्र पर गुस्सा किया और वह प्रेमेन्द्र को दुबारा कैसा जन्म जीवन देना चाहते थे?</span><span data-lang="hi-ro">Prashna: Kisne Premendra par gussa kiya aur vah Premendra ko dubaara kaisa janm jeevan dena chaahte the?</span></p>
+                                <p class="text-gray-700"><span data-lang="hi">उत्तर: विधाता और जानवर</span><span data-lang="hi-ro">Uttar: Vidhaata aur jaanwar</span></p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                            </div>
+                        </div>
+                        <div class="english-translation"></div>
+                    </div>
+                </details>
+                
+                <!-- NEW SECTION: Lesson 4-8 -->
+                <details class="marks-section">
+                    <summary>
+                        <span data-lang="hi">अतिरिक्त प्रश्न (पाठ ४-८)</span>
+                        <span data-lang="hi-ro">Additional Questions (Lessons 4-8)</span>
+                    </summary>
+                    <div class="divide-y divide-gray-100">
+                         <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: (पाठ ४) यात्रा वृत्तांत किस तिर्थस्थल से संबंधित है? और उसके निकट कौनसे पर्वत है?</span><span data-lang="hi-ro">Prashna: (Paath 4) Yatra vrittant kis tirthsthal se sambandhit hai? Aur uske nikat kaunse parvat hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: बद्रीनाथ, हिमालय</span><span data-lang="hi-ro">Uttar: Badrinath, Himalaya</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: (पाठ ४) साधन पहुंचाने का माध्यम पहले क्या था और अब क्या है?</span><span data-lang="hi-ro">Prashna: (Paath 4) Saadhan pahunchaane ka maadhyam pehle kya tha aur ab kya hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: पहले यात्रियों व्दारा, अब भेडों द्वारा साधन पहुचाया जाता है।</span><span data-lang="hi-ro">Uttar: Pehle yaatriyon dwara, ab bhedon dwara saadhan pahunchaaya jaata hai.</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: (पाठ ५) पिछले कितने दशक से हमारे सामने कौनसी गंभीर समस्या है?</span><span data-lang="hi-ro">Prashna: (Paath 5) Pichhle kitne dashak se hamaare saamne kaunsi gambheer samasya hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: पाच, पर्यावरण प्रदुषण</span><span data-lang="hi-ro">Uttar: Paanch, paryaavaran pradushan</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: (पाठ ५) प्रदुषण से क्या तात्पर्य है?</span><span data-lang="hi-ro">Prashna: (Paath 5) Pradushan se kya taatparya hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: जल, थल और वायु में हानिकारक पदार्थों का मिलना</span><span data-lang="hi-ro">Uttar: Jal, thal aur vayu mein haanikaarak padaarthon ka milna</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: (पाठ ६) चरित्र संगठन इस पाठ के लेखक कौन है?</span><span data-lang="hi-ro">Prashna: (Paath 6) Charitra Sangathan is paath ke lekhak kaun hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: बाबु गुलाबराय</span><span data-lang="hi-ro">Uttar: Babu Gulabrai</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: (पाठ ६) चरित्र को परिभाषित कीजिए?</span><span data-lang="hi-ro">Prashna: (Paath 6) Charitra ko paribhaashit kijiye?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: चरित्र उन गुणों का समुह है जो हमारे व्यवहार से संबंध रखते है</span><span data-lang="hi-ro">Uttar: Charitra un gunon ka samuh hai jo hamaare vyavhaar se sambandh rakhte hai</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: (पाठ ७) काले कौए: गोरे हंस इस पाठ के दो भाईयों के नाम लिखिए?</span><span data-lang="hi-ro">Prashna: (Paath 7) Kaale Kaue: Gore Hans is paath ke do bhaiyon ke naam likhiye?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: मुरली, मनोहर</span><span data-lang="hi-ro">Uttar: Murli, Manohar</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: (पाठ ७) इंद्रा के पति कौन है? और पडोसन का नाम क्या है?</span><span data-lang="hi-ro">Prashna: (Paath 7) Indra ke pati kaun hai? Aur padosan ka naam kya hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: निर्मल, चमेली</span><span data-lang="hi-ro">Uttar: Nirmal, Chameli</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: (पाठ ८) विज्ञान ने मानव को कौनसी सुविधा दी है?</span><span data-lang="hi-ro">Prashna: (Paath 8) Vigyaan ne maanav ko kaunsi suvidha di hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: घर बैठे ही विश्व से जुडने की सुविधा</span><span data-lang="hi-ro">Uttar: Ghar baithe hi vishwa se judne ki suvidha</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रश्न: (पाठ ८) हिंदी की लिपी क्या है? और हिंदी फोंट्स की क्या कठिनता है?</span><span data-lang="hi-ro">Prashna: (Paath 8) Hindi ki lipi kya hai? Aur Hindi fonts ki kya kathinta hai?</span></p>
+                                    <p class="text-gray-700"><span data-lang="hi">उत्तर: देवनागरी, एकरुपता का अभाव</span><span data-lang="hi-ro">Uttar: Devanagari, ekroopta ka abhaav</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- ======================= -->
+        <!-- 📝 Page 3: Section II (6 Marks) -->
+        <!-- ======================= -->
+        <div id="page-sec2" class="page">
+            <h1 class="text-3xl md:text-4xl font-bold mb-6">
+                <span data-lang="hi">खंड II: ६ अंक के प्रश्न</span>
+                <span data-lang="hi-ro">Khand II: 6 Ank ke Prashna</span>
+            </h1>
+
+            <div class="card overflow-hidden">
+                <!-- Summaries -->
+                <details class="marks-section" open>
+                    <summary>
+                        <span data-lang="hi">पाठ सारांश (सार)</span>
+                        <span data-lang="hi-ro">Paath Saaransh (Summary)</span>
+                    </summary>
+                    <div class="divide-y divide-gray-100">
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">भाषा का महत्व (सारांश):</span><span data-lang="hi-ro">Bhasha ka Mahatva (Summary):</span></p>
+                                    <p class="text-gray-700" data-lang="hi">पाठ के लेखक हरदेव बाहरी हैं। मनुष्य विचारशील है और पशुओं से भिन्न है। भाषा के बिना समाज और संस्कृति संभव नहीं है। भाषा एक जादू है जो मुर्दा दिलों में जान फूंकती है और बुद्धि-प्रतिभा को विकसित करती है। मधुर बातें दिलों को जोड़ती हैं और कड़वी बातें अपनों को पराया बना देती हैं। भाषा ही जीवन में सफलता की कुंजी है और शिक्षित-अशिक्षित की पहचान कराती है।</p>
+                                    <p class="text-gray-700" data-lang="hi-ro">Paath ke lekhak Hardev Bahri hain. Manushya vichaarsheel hai aur pashuon se bhinn hai. Bhasha ke bina samaaj aur sanskriti sambhav nahi hai. Bhasha ek jaadu hai jo murda dilon mein jaan phoonkti hai aur buddhi-pratibha ko viksit karti hai. Madhur baatein dilon ko jodti hain aur kadvi baatein apnon ko paraya bana deti hain. Bhasha hi jeevan mein safalta ki kunji hai aur shikshit-ashikshit ki pehchaan karaati hai.</p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                             <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">चीफ की दावत (सारांश):</span><span data-lang="hi-ro">Chief ki Daawat (Summary):</span></p>
+                                    <p class="text-gray-700" data-lang="hi">शामनाथ और उसकी पत्नी ने चीफ को दावत पर बुलाया। वे अपनी माँ को एक समस्या समझते थे क्योंकि वह अंग्रेजी नहीं जानती थीं और उनके खर्राटों और पुराने कपड़ों से उन्हें शर्मिंदगी महसूस होती थी। चीफ को माँ से मिलकर अच्छा लगा और उन्होंने माँ की बनाई 'फुलकारी' की बहुत तारीफ की। चीफ के जाने के बाद, शामनाथ ने माँ से और फुलकारी बनाने को कहा, जबकि माँ उदास होकर रो रही थीं।</p>
+                                    <p class="text-gray-700" data-lang="hi-ro">Shamnath aur uski patni ne Chief ko daawat par bulaya. Ve apni Maa ko ek samasya samajhte a-ro kyonki vah angrezi nahi jaanti thi aur unke kharraaton aur puraane kapdon se unhein sharmindagi mehsoos hoti thi. Chief ko Maa se milkar achha laga aur unhonne Maa ki banaai 'Phulkari' ki bahut taareef ki. Chief ke jaane ke baad, Shamnath ne Maa se aur Phulkari banaane ko kaha, jabki Maa udaas hokar ro rahi thin.</p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <!-- Q&A Summary 3 -->
+                        <div class="qna-block">
+                             <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रेमियों की वापसी (सारांश):</span><span data-lang="hi-ro">Premiyon ki Vaapsi (Summary):</span></p>
+                                    <p class="text-gray-700" data-lang="hi">लेखक हरिशंकर परसाई हैं। रंजना और प्रेमेंद्र आत्महत्या करने वाले हैं। वे दुनिया को क्रूर बताते हैं। बाद में, वे एक-दूसरे की आदतों (नाखून काटना, जम्हाई लेना) से परेशान हो जाते हैं। हेडमास्टर और हेडमास्टरनी की मुलाकात होती है। प्रेमेन्द्र 5वीं मंजिल से कूदकर पुलिस पर गिरता है। अंत में, भगवान उन्हें जानवर का जन्म देने का निर्णय लेते हैं।</p>
+                                    <p class="text-gray-700" data-lang="hi-ro">Lekhak Harishankar Parsai hain. Ranjana aur Premendra aatmahatya karne waale hain. Ve duniya ko kroor bataate hain. Baad mein, ve ek-doosre ki aadaton (naakhoon kaatna, jamhaai lena) se pareshaan ho jaate hain. Headmaster aur Headmistress ki mulaqaat hoti hai. Premendra 5th manzil se koodkar police par girta hai. Ant mein, Bhagwaan unhein jaanwar ka janm dene ka nirnay lete hain.</p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Contextual Explanation -->
+                <details class="marks-section">
+                    <summary>
+                        <span data-lang="hi">सप्रसंग व्याख्या</span>
+                        <span data-lang="hi-ro">Saprasang Vyakhya</span>
+                    </summary>
+                     <div class="divide-y divide-gray-100">
+                        <div class="p-4 bg-gray-100"><p class="font-bold" data-lang="hi">पाठ ३: प्रेमियों की वापसी</p><p class="font-bold" data-lang="hi-ro">Paath 3: Premiyon ki Vaapsi</p></div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium" data-lang="hi">"यह दुनिया क्रूर है। प्रेमियों को मिलने नही देती। हम इसे छोडकर उस लोक जा रहे है, जहाँ प्रेम के मार्ग में कोई बाधा नहीं है।"</p>
+                                    <p class="font-medium" data-lang="hi-ro">"Yah duniya kroor hai. Premiyon ko milne nahi deti. Hum ise chhodkar us lok ja rahe hain, jahaan prem ke maarg mein koi baadha nahi hai."</p>
+                                    <p class="text-gray-700"><span data-lang="hi">संदर्भ: (प्रेमियों की वापसी) प्रमेंद्र और रंजना ने आत्महत्या करने से पहले चिठ्ठी में लिखा।</span><span data-lang="hi-ro">Sandarbh: (Premiyon ki Vaapsi) Premendra aur Ranjana ne aatmahatya karne se pehle chiththi mein likha.</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium" data-lang="hi">"अरे, पतिव्रता होती, तो हमारे किस काम आती? फ्लर्ट है, तभी तो हमे फायदा पहुँचाती रही है।"</p>
+                                    <p class="font-medium" data-lang="hi-ro">"Arey, pativrata hoti, toh hamaare kis kaam aati? Flirt hai, tabhi toh humein faayda pahunchaati rahi hai."</p>
+                                    <p class="text-gray-700"><span data-lang="hi">संदर्भ: चाचा ने प्रमेंद्र से कहा।</span><span data-lang="hi-ro">Sandarbh: Chacha ne Premendra se kaha.</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium" data-lang="hi">"प्रभु, हमारी दुनिया में स्वतंत्रता नहीं है, इसलिए जो हमारे संपर्क में आ जाता है, उसी से हमे प्रेम करना पडता है।"</p>
+                                    <p class="font-medium" data-lang="hi-ro">"Prabhu, hamaari duniya mein swatantrata nahi hai, isliye jo hamaare sampark mein aa jaata hai, usi se humein prem karna padta hai."</p>
+                                    <p class="text-gray-700"><span data-lang="hi">संदर्भ: रंजना ने भगवान से प्रार्थना की।</span><span data-lang="hi-ro">Sandarbh: Ranjana ne Bhagwaan se praarthana ki.</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+
+                        <div class="p-4 bg-gray-100"><p class="font-bold" data-lang="hi">पाठ 4: सुई दो रानी डोरा दो रानी</p><p class="font-bold" data-lang="hi-ro">Paath 4: Sui Do Rani Dora Do Rani</p></div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium" data-lang="hi">"किसी वस्तु के प्राप्त कर लेने की इच्छा में जो मधुरता है वह उस इच्छा की पूर्ति में नहीं।"</p>
+                                    <p class="font-medium" data-lang="hi-ro">"Kisi vastu ke praapt kar lene ki ichha mein jo madhurta hai vah us ichha ki purti mein nahi."</p>
+                                    <p class="text-gray-700"><span data-lang="hi">संदर्भ: लेखिका ने कहा।</span><span data-lang="hi-ro">Sandarbh: Lekhika ne kaha.</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium" data-lang="hi">"उतुंग स्वर्ग के चरणों से ही नरक की अतल गहराई बँधी है।"</p>
+                                    <p class="font-medium" data-lang="hi-ro">"Utung swarg ke charanon se hi narak ki atal gehraai bandhi hai."</p>
+                                    <p class="text-gray-700"><span data-lang="hi">संदर्भ: लेखिका ने पाठको से कहा।</span><span data-lang="hi-ro">Sandarbh: Lekhika ne paathako se kaha.</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+
+                        <div class="p-4 bg-gray-100"><p class="font-bold" data-lang="hi">पाठ 7: काले कौए: गोरे हंस</p><p class="font-bold" data-lang="hi-ro">Paath 7: Kaale Kaue: Gore Hans</p></div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium" data-lang="hi">"पैसा रहते हुए भी अगर लोक परलोक न बनाया तो पैसा किस काम का भैया..।"</p>
+                                    <p class="font-medium" data-lang="hi-ro">"Paisa rehte hue bhi agar lok parlok na banaaya toh paisa kis kaam ka bhaiya..."</p>
+                                    <p class="text-gray-700"><span data-lang="hi">संदर्भ: पाठ से।</span><span data-lang="hi-ro">Sandarbh: Paath se.</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium" data-lang="hi">"जिस माँ ने जन्म दिया, पाला-पोसा, ...उसके साथ ऐसा व्यवहार।"</p>
+                                    <p class="font-medium" data-lang="hi-ro">"Jis Maa ne janm diya, paala-posa, ...uske saath aisa vyavhaar."</p>
+                                    <p class="text-gray-700"><span data-lang="hi">संदर्भ: पाठ से।</span><span data-lang="hi-ro">Sandarbh: Paath se.</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium" data-lang="hi">"हंस का नीर-क्षीर विवेक प्रसिध्द है। ...हम काले कौए नही, गोरे हंस है।"</p>
+                                    <p class="font-medium" data-lang="hi-ro">"Hans ka neer-ksheer vivek prasiddh hai. ...Hum kaale kaue nahi, gore hans hain."</p>
+                                    <p class="text-gray-700"><span data-lang="hi">संदर्भ: पाठ से।</span><span data-lang="hi-ro">Sandarbh: Paath se.</span></p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                     </div>
+                </details>
+            </div>
+        </div>
+        
+        <!-- ======================= -->
+        <!-- 📝 Page 4: Section III (10 Marks) -->
+        <!-- ======================= -->
+        <div id="page-sec3" class="page">
+            <h1 class="text-3xl md:text-4xl font-bold mb-6">
+                <span data-lang="hi">खंड III: १० अंक के प्रश्न</span>
+                <span data-lang="hi-ro">Khand III: 10 Ank ke Prashna</span>
+            </h1>
+            
+            <div class="card overflow-hidden">
+                <!-- Essay -->
+                <details class="marks-section" open>
+                    <summary>
+                        <span data-lang="hi">निबंध (Essay)</span>
+                        <span data-lang="hi-ro">Nibandh (Essay)</span>
+                    </summary>
+                    <div class="divide-y divide-gray-100">
+                        <div class="p-4 bg-blue-50 border-b border-blue-200">
+                            <h3 class="font-bold text-lg">
+                                <span data-lang="hi">विषय: महिला सशक्तिकरण</span>
+                                <span data-lang="hi-ro">Vishay: Mahila Sashaktikaran</span>
+                            </h3>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">प्रस्तावना (Introduction)</span><span data-lang="hi-ro">Prastaavana (Introduction)</span></p>
+                                    <p class="text-gray-700" data-lang="hi">महिला सशक्तिकरण का तात्पर्य किसी व्यक्ति की उस योग्यता से है, जिसमें वो अपने जीवन से जुड़े सभी निर्णय स्वयं ले सके। यह वह प्रक्रिया है, जिसमें महिलाओं को समाज के सभी क्षेत्रों में समान अवसर और अधिकार मिलते हैं, जिससे वे आत्मनिर्भर बन सकें।</p>
+                                    <p class="text-gray-700" data-lang="hi-ro">Mahila sashaktikaran ka taatparya kisi vyakti ki us yogyata se hai, jismein vo apne jeevan se jude sabhi nirnay swayam le sake. Yah vah prakriya hai, jismein mahilaon ko samaaj ke sabhi kshetro mein samaan avsar aur adhikaar milte hain, jisse ve aatmanirbhar ban sakein.</p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                         <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">आवश्यकता (Need)</span><span data-lang="hi-ro">Aavashyakta (Need)</span></p>
+                                    <p class="text-gray-700" data-lang="hi">भारत एक पुरुष प्रधान देश है। देश की 50% आबादी महिला है। देश का पूर्ण विकास महिलाओं के सहयोग के बिना नहीं हो सकता, इसलिए महिलाओं का सशक्त होना अत्यंत अनिवार्य है।</p>
+                                    <p class="text-gray-700" data-lang="hi-ro">Bharat ek purush pradhan desh hai. Desh ki 50% aabaadi mahila hai. Desh ka purna vikaas mahilaon ke sahyog ke bina nahi ho sakta, isliye mahilaon ka sashakt hona atyant anivaarya hai.</p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">उपसंहार (Conclusion)</span><span data-lang="hi-ro">Upsanhaar (Conclusion)</span></p>
+                                    <p class="text-gray-700" data-lang="hi">नारी के साथ भेदभाव कर उनकी शक्ति को कम आंकना गलत है। लैंगिक असमानता को दूर करके ही नारी को सशक्त बनाना जरूरी है। उन्हें शिक्षा और विकास के पूर्ण अवसर मिलने चाहिए।</p>
+                                    <p class="text-gray-700" data-lang="hi-ro">Naari ke saath bhedbhaav kar unki shakti ko kam aankna galat hai. Laingik asamaanata ko door karke hi naari ko sashakt banaana jaroori hai. Unhein shiksha aur vikaas ke purna avsar milne chaahiye.</p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Letter -->
+                <details class="marks-section">
+                    <summary>
+                        <span data-lang="hi">औपचारिक पत्र (Formal Letter)</span>
+                        <span data-lang="hi-ro">Aupachaarik Patra (Formal Letter)</span>
+                    </summary>
+                    <div class="qna-block">
+                        <div class="qna-text">
+                            <p class="font-medium"><span data-lang="hi">विषय: हिन्दी की प्रगति का विवरण मांगना।</span><span data-lang="hi-ro">Vishay: Hindi ki pragati ka vivaran maangna.</span></p>
+                            <div class="p-4 bg-gray-50 rounded-lg text-sm leading-relaxed overflow-x-auto mt-2">
+<pre class="font-mono">
+<span lang="hi"><strong>प्रेषक (Preshak)</strong> = Sender (From)</span>
+<span lang="hi">उपसचिव,</span>
+<span lang="hi">शिक्षा मंत्रालय, भारत सरकार,</span>
+<span lang="hi">नई दिल्ली-46002</span>
+
+<span lang="hi"><strong>सेवा में (Seva mein)</strong> = To</span>
+<span lang="hi">सचिव,</span>
+<span lang="hi">शिक्षा मंत्रालय, कर्नाटक राज्य,</span>
+<span lang="hi">बेंगलूरू-560007</span>
+
+<span lang="hi">नई दिल्ली, दिनांक..............</span>
+
+<strong lang="hi">विषय (Vishay) = Subject</strong>
+<strong lang="hi">कर्नाटक राज्य में हो रही हिन्दी की प्रगति का विवरण।</strong>
+
+<span lang="hi"><strong>महोदय (Mahoday)</strong> = Respected Sir</span>
+<span lang"hi">मुझे यह सूचित करने का निदेश हुआ है कि कर्नाटक राज्य में हो रही हिन्दी की प्रगति का विवरण हमें भेजा जाए। विद्यालायों में, महाविद्यालयों में, विश्वविद्यालयों में, हिन्दी की प्रगति किस तरह हो रही है इसका विवरण भेजा जाए।</span>
+
+<span lang="hi">धन्यवाद । (Thank you)</span>
+<span lang="hi"><strong>भवदीय (Bhavadeeya)</strong> = Yours faithfully</span>
+<span lang="hi">क.ग.घ. (A.B.C.)</span>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+                
+                <!-- Précis Writing -->
+                <details class="marks-section">
+                    <summary>
+                        <span data-lang="hi">संक्षेपण (Précis Writing)</span>
+                        <span data-lang="hi-ro">Sankshepan (Précis Writing)</span>
+                    </summary>
+                     <div class="divide-y divide-gray-100">
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">संक्षेपण क्या है?</span><span data-lang="hi-ro">Sankshepan kya hai?</span></p>
+                                    <p class="text-gray-700" data-lang="hi">संक्षेपण का अर्थ है किसी दिए गए गद्यांश (paragraph) को उसके मूल भाव को बदले बिना, कम से कम शब्दों में (आमतौर पर एक-तिहाई शब्दों में) लिखना।</p>
+                                    <p class="text-gray-700" data-lang="hi-ro">Sankshepan ka arth hai kisi diye gaye gadyansh (paragraph) ko uske mool bhaav ko badle bina, kam se kam shabdon mein (aamtaur par ek-tihaai shabdon mein) likhna.</p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                        <div class="qna-block">
+                            <div class="qna-content">
+                                <div class="qna-text">
+                                    <p class="font-medium"><span data-lang="hi">कैसे लिखें? (60-62 शब्द)</span><span data-lang="hi-ro">Kaise likhein? (60-62 shabda)</span></p>
+                                    <p class="text-gray-700" data-lang="hi">1. गद्यांश को 2-3 बार ध्यान से पढ़ें।<br>2. मुख्य बिंदुओं (main points) को रेखांकित (underline) करें।<br>3. उदाहरणों, मुहावरों और दोहराई गई बातों को हटा दें।<br>4. सभी मुख्य बिंदुओं को अपनी भाषा में क्रम से लिखें।<br>5. एक उपयुक्त शीर्षक (Title) दें।</p>
+                                    <p class="text-gray-700" data-lang="hi-ro">1. Gadyansh ko 2-3 baar dhyaan se padhein.<br>2. Mukhya binduon (main points) ko rekhaankit (underline) karein.<br>3. Udaaharanon, muhaavaron aur dohraai gai baaton ko hata dein.<br>4. Sabhi mukhya binduon ko apni bhasha mein kram se likhein.<br>5. Ek upayukt sheershak (Title) dein.</p>
+                                </div>
+                                <div class="flex-shrink-0 flex flex-col gap-2">
+                                    <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                                    <button class="action-btn translate-btn" onclick="translateText(this, 'hi')">🌎</button>
+                                </div>
+                            </div>
+                            <div class="english-translation"></div>
+                        </div>
+                     </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- ======================= -->
+        <!-- 🛠️ Page 5: Study Tools    -->
+        <!-- ======================= -->
+        <div id="page-tools" class="page">
+            <h1 class="text-3xl md:text-4xl font-bold mb-6">
+                <span data-lang="hi">स्टडी टूल्स</span>
+                <span data-lang="hi-ro">Study Tools</span>
+            </h1>
+
+            <!-- NEW VOCABULARY SECTION -->
+            <details class="marks-section card mb-6" open>
+                <summary>
+                    <span data-lang="hi">Vocabulary List (शब्द-ज्ञान)</span>
+                    <span data-lang="hi-ro">Vocabulary List (Shabd-Gyaan)</span>
+                </summary>
+                <div class="divide-y divide-gray-100">
+                    <!-- Word 26 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">सूत्र</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Sootra</p>
+                                <p class="text-gray-500">English: Formula</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 27 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">स्नातक</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Snaatak</p>
+                                <p class="text-gray-500">English: Graduate</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 28 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">मार्गदर्शन</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Maargdarshan</p>
+                                <p class="text-gray-500">English: Guidance</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 29 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">भूविज्ञानी</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Bhoovigyaani</p>
+                                <p class="text-gray-500">English: Geologist</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 30 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">भू-ताप</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Bhoo-taap</p>
+                                <p class="text-gray-500">English: Global Warming</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 31 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">राजपथ</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Raajpath</p>
+                                <p class="text-gray-500">English: Highway</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 32 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">मानदेय</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Maandey</p>
+                                <p class="text-gray-500">English: Honorarium</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 33 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">पनबिजली</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Panbijli</p>
+                                <p class="text-gray-500">English: Hydroelectricity</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 34 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">सूचना प्रौद्योगिकी</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Soochna Praudyogiki</p>
+                                <p class="text-gray-500">English: Information Technology</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 35 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">साक्षात्कार</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Saakshaatkaar</p>
+                                <p class="text-gray-500">English: Interview</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 36 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">पहचान पत्र</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Pehchaan Patra</p>
+                                <p class="text-gray-500">English: Identity Card</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 37 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">उद्योगीकरण</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Udyogikaran</p>
+                                <p class="text-gray-500">English: Industrialization</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 38 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">अधिकतम</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Adhiktam</p>
+                                <p class="text-gray-500">English: Maximum</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 39 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">प्रवास प्रमाण-पत्र</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Pravaas Pramaan-Patra</p>
+                                <p class="text-gray-500">English: Migration Certificate</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 40 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">स्मारक</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Smaarak</p>
+                                <p class="text-gray-500">English: Monument</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 41 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">संशोधन</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Sanshodhan</p>
+                                <p class="text-gray-500">English: Modification</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 42 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">बहु-राष्ट्रीय</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Bahu-raashtreeya</p>
+                                <p class="text-gray-500">English: Multi-National</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 43 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">संसद</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Sansad</p>
+                                <p class="text-gray-500">English: Parliament</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 44 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">पदोन्नति</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Padonnati</p>
+                                <p class="text-gray-500">English: Promotion</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 45 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">प्राथमिकता</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Praathmikta</p>
+                                <p class="text-gray-500">English: Priority</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 46 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">प्रश्नोत्तरी</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Prashnottari</p>
+                                <p class="text-gray-500">English: Quiz</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 47 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">वजन</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Vajan</p>
+                                <p class="text-gray-500">English: Mass</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 48 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">अणु</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Anu</p>
+                                <p class="text-gray-500">English: Molecule</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 49 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">अनुसंधान संस्थान</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Anusandhaan Sansthaan</p>
+                                <p class="text-gray-500">English: Research Institute</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Word 50 -->
+                    <div class="qna-block">
+                        <div class="qna-content">
+                            <div class="qna-text">
+                                <p class="font-medium" data-lang="hi">आरक्षण</p>
+                                <p class="text-gray-700" data-lang="hi-ro">Aarakshan</p>
+                                <p class="text-gray-500">English: Reservation</p>
+                            </div>
+                            <div class="flex-shrink-0 flex flex-col gap-2">
+                                <button class="action-btn speak-btn" onclick="playAudioFromElement(this)">🔈</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Dictionary -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-4">
+                        <span data-lang="hi">डिक्शनरी</span>
+                        <span data-lang="hi-ro">Dictionary</span>
+                    </h2>
+                    <div class="relative">
+                        <input id="dictionary-search-input" type="search" placeholder="Search any English or Hindi word..." class="w-full p-3 pr-12 rounded-full border-2 border-gray-200 focus:outline-none focus:border-accent-blue" onkeyup="if(event.key === 'Enter') searchDictionary()">
+                        <button class="absolute right-1.5 top-1/2 -translate-y-1/2 btn btn-blue p-2 rounded-full h-9 w-9" onclick="searchDictionary()">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        </button>
+                    </div>
+                    <div id="dictionary-results" class="mt-4 hidden">
+                        <div id="dictionary-loading" class="text-center p-4 hidden">
+                            <div class="spinner-dark inline-block"></div>
+                        </div>
+                        <div id="dictionary-output"></div>
+                    </div>
+                </div>
+
+                <!-- Quiz -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold">
+                        <span data-lang="hi">क्विज़</span>
+                        <span data-lang="hi-ro">Quiz</span>
+                    </h2>
+                    <p class="text-gray-600 mt-2 mb-4">
+                        <span data-lang="hi">जल्द आ रहा है...</span>
+                        <span data-lang="hi-ro">Jald aa raha hai...</span>
+                    </p>
+                    <button class="btn btn-blue w-full opacity-50 cursor-not-allowed">Start Daily Quiz</button>
+                </div>
+            </div>
+            
+            <!-- AI Study Assistant -->
+            <section class="card mt-8 overflow-hidden">
+                <h2 class="text-2xl font-bold p-6 border-b border-gray-200">🤖 AI Study Assistant</h2>
+                <div id="ai-chat-window" class="p-6 h-96 overflow-y-auto bg-gray-50 space-y-4">
+                    <div class="flex justify-start">
+                        <div class="bg-blue-100 text-blue-900 p-3 rounded-lg max-w-xs">
+                            <p><span data-lang="hi">नमस्ते! कोई सवाल पूछें। (जैसे: "What is 'संज्ञा'?")</span><span data-lang="hi-ro">Namaste! Koi sawaal poochein. (Jaise: "What is 'संज्ञा'?")</span></p>
+                        </div>
+                    </div>
+                </div>
+                <form id="ai-chat-form" class="p-4 bg-white border-t border-gray-200 flex gap-4">
+                    <input id="ai-chat-input" type="text" placeholder="Ask for a translation or meaning..." class="w-full p-3 rounded-full border-2 border-gray-200 focus:outline-none focus:border-accent-blue" required>
+                    <button type="submit" class="btn btn-blue rounded-full p-3 h-12 w-12">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+                    </button>
+                </form>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 mt-16 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <p class="text-sm text-gray-400">Created & Managed By: <strong>Shaarif (Founder, Zomaxa Agency)</strong></p>
+            <p class="text-xs text-gray-500 mt-1">"Zomaxa is a creative digital agency helping brands grow."</p>
+            <div class="mt-4">
+                <a href="http://www.zomaxa.co" target="_blank" rel="noopener noreferrer" class="text-sm text-accent-blue hover:underline">
+                    🔗 www.zomaxa.co
+                </a>
+            </div>
+            <p class="mt-6 text-xs text-gray-500">© 2025 Easy Hindi Notes. All Rights Reserved. Powered by Zomaxa Agency ❤️</p>
+        </div>
+    </footer>
+
+
+    <!-- ======================= -->
+    <!-- JavaScript Functionality -->
+    <!-- ======================= -->
+    <script>
+        
+        // --- Core Page Navigation ---
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        function showPage(pageId, isMobile = false) {
+            pages.forEach(page => page.classList.remove('active'));
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) targetPage.classList.add('active');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-accent-blue', 'font-bold');
+                link.classList.add('text-gray-700');
+                if (link.getAttribute('href') === `#${pageId.replace('page-','')}`) {
+                    link.classList.add('text-accent-blue', 'font-bold');
+                    link.classList.remove('text-gray-700');
+                }
+            });
+            
+            if (isMobile) mobileMenu.classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
+        
+        // --- Hinglish/Hindi Language Toggle ---
+        let currentLang = 'hi'; // 'hi' or 'hi-ro'
+        const translateBtn = document.getElementById('translateBtn');
+        const translateBtnMobile = document.getElementById('translateBtnMobile');
+
+        function setLanguageDisplay() {
+            const hiElements = document.querySelectorAll('[data-lang="hi"]');
+            const hiRoElements = document.querySelectorAll('[data-lang="hi-ro"]');
+            
+            if (currentLang === 'hi') {
+                hiElements.forEach(el => el.style.display = 'inline');
+                hiRoElements.forEach(el => el.style.display = 'none');
+                translateBtn.innerHTML = 'Switch to Hinglish';
+                translateBtnMobile.innerHTML = 'Switch to Hinglish';
+            } else {
+                hiElements.forEach(el => el.style.display = 'none');
+                hiRoElements.forEach(el => el.style.display = 'inline');
+                translateBtn.innerHTML = 'Switch to Hindi (हिन्दी)';
+                translateBtnMobile.innerHTML = 'Switch to Hindi (हिन्दी)';
+            }
+        }
+        
+        function toggleLanguage() {
+            currentLang = (currentLang === 'hi') ? 'hi-ro' : 'hi';
+            setLanguageDisplay();
+        }
+
+        translateBtn.addEventListener('click', toggleLanguage);
+        translateBtnMobile.addEventListener('click', toggleLanguage);
+
+        // --- Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('page-home');
+            setLanguageDisplay();
+            
+            document.getElementById('mobile-menu-button').addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+        
+        // --- TTS (Text-to-Speech) Functionality ---
+        const speakerIconSVG = `🔈`;
+        const spinnerSVG = `<div class="spinner"></div>`;
+        let currentAudio = null;
+
+        // *** UPDATED FUNCTION ***
+        // Reads ALL [data-lang="hi"] text inside the .qna-text parent
+        function playAudioFromElement(button) {
+            const textBlock = button.closest('.qna-block');
+            if (!textBlock) return;
+            
+            // Find all Hindi elements *within* the main text area
+            const hindiElements = textBlock.querySelectorAll('.qna-text [data-lang="hi"]');
+            if (hindiElements.length === 0) return;
+
+            // Combine the text content of all found elements
+            let textToSpeak = "";
+            hindiElements.forEach(el => {
+                textToSpeak += el.textContent + ". "; // Add a period for a natural pause
+            });
+            
+            playAudio(button, textToSpeak.trim());
+        }
+        
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window.atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        function pcmToWav(pcmData, sampleRate) {
+            const numChannels = 1, bytesPerSample = 2, blockAlign = numChannels * bytesPerSample;
+            const byteRate = sampleRate * blockAlign, dataSize = pcmData.length * bytesPerSample;
+            const buffer = new ArrayBuffer(44 + dataSize);
+            const view = new DataView(buffer);
+            view.setUint32(0, 0x52494646, false); // 'RIFF'
+            view.setUint32(4, 36 + dataSize, true);
+            view.setUint32(8, 0x57415645, false); // 'WAVE'
+            view.setUint32(12, 0x666d7420, false); // 'fmt '
+            view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true); view.setUint32(28, byteRate, true);
+            view.setUint16(32, blockAlign, true); view.setUint16(34, 16, true);
+            view.setUint32(36, 0x64617461, false); // 'data'
+            view.setUint32(40, dataSize, true);
+            let offset = 44;
+            for (let i = 0; i < pcmData.length; i++, offset += 2) {
+                view.setInt16(offset, pcmData[i], true);
+            }
+            return new Blob([view], { type: 'audio/wav' });
+        }
+        
+        async function fetchWithBackoff(url, options, retries = 3, delay = 1000) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    if (response.status === 429 && retries > 0) {
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        return fetchWithBackoff(url, options, retries - 1, delay * 2);
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            } catch (error) {
+                if (retries > 0) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithBackoff(url, options, retries - 1, delay * 2);
+                }
+                throw error;
+            }
+        }
+
+        async function playAudio(button, textToSpeak) {
+            if (currentAudio) currentAudio.pause();
+            if (!textToSpeak) return;
+
+            button.disabled = true;
+            button.innerHTML = spinnerSVG;
+            
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: textToSpeak }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } } }
+                },
+                model: "gemini-2.5-flash-preview-tts"
+            };
+
+            try {
+                const result = await fetchWithBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/L16")) {
+                    const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)[1], 10) || 24000;
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const pcm16 = new Int16Array(pcmData);
+                    const wavBlob = pcmToWav(pcm16, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    currentAudio = new Audio(audioUrl);
+                    currentAudio.play();
+                    currentAudio.onended = () => {
+                        button.disabled = false;
+                        button.innerHTML = speakerIconSVG;
+                        currentAudio = null;
+                    };
+                } else { throw new Error("Invalid audio data."); }
+            } catch (error) {
+                console.error("TTS Error:", error);
+                button.disabled = false;
+                button.innerHTML = speakerIconSVG;
+            }
+        }
+
+        // --- Gemini API Call (Text & Translation) ---
+        const translationCache = new Map();
+
+        async function callGeminiAPI(userQuery, systemPrompt) {
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+            try {
+                // Using fetchWithBackoff for text generation as well
+                const result = await fetchWithBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                return text || "Sorry, I couldn't process that. Please try again.";
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                return "An error occurred. Please try again later.";
+            }
+        }
+
+        // --- In-line Translation Function ---
+        async function translateText(button) {
+            const block = button.closest('.qna-block');
+            const translationBox = block.querySelector('.english-translation');
+            if (!translationBox) return;
+
+            // Find all Hindi elements to combine them for translation
+            const hindiElements = block.querySelectorAll('.qna-text [data-lang="hi"]');
+            if (hindiElements.length === 0) return;
+
+            let textToTranslate = "";
+            hindiElements.forEach(el => {
+                textToTranslate += el.textContent + " ";
+            });
+            textToTranslate = textToTranslate.trim();
+            
+            if (translationBox.style.display === "block") {
+                translationBox.style.display = "none";
+                return;
+            }
+
+            if (translationCache.has(textToTranslate)) {
+                translationBox.innerHTML = translationCache.get(textToTranslate);
+                translationBox.style.display = "block";
+                return;
+            }
+
+            button.disabled = true;
+            button.classList.add('loading');
+            button.innerHTML = `<div class="spinner-dark" style="width:1.25rem; height:1.25rem; border-width: 2px;"></div>`;
+            
+            const systemPrompt = "You are a direct translator. Translate the given Hindi text to simple, clear English. Do not add any extra commentary. Just provide the translation.";
+            const translation = await callGeminiAPI(textToTranslate, systemPrompt);
+
+            translationCache.set(textToTranslate, translation);
+            translationBox.innerHTML = translation;
+            translationBox.style.display = "block";
+
+            button.disabled = false;
+            button.classList.remove('loading');
+            button.innerHTML = '🌎';
+        }
+
+        // --- Dictionary Search ---
+        async function searchDictionary() {
+            const input = document.getElementById('dictionary-search-input');
+            const query = input.value;
+            if (!query) return;
+
+            const resultsContainer = document.getElementById('dictionary-results');
+            const outputDiv = document.getElementById('dictionary-output');
+            const loadingDiv = document.getElementById('dictionary-loading');
+            
+            outputDiv.innerHTML = '';
+            resultsContainer.classList.remove('hidden');
+            loadingDiv.classList.remove('hidden');
+
+            const systemPrompt = `You are a concise Hindi-English dictionary. User will provide a word (in Hindi or English). Respond with:
+1.  **Translation:** (e.g., <strong lang='hi'>मार्गदर्शन</strong>)
+2.  **Pronunciation:** (e.g., <em>(Maargdarshan)</em>)
+3.  **Example Sentence:** (e.g., <p lang='hi' class="mt-2"><strong>उदाहरण:</strong> मेरे शिक्षक ने मुझे मार्गदर्शन दिया।</p><p class='text-sm text-gray-500'>(Mere shikshak ne mujhe maargdarshan diya.)</p>)
+Format your response in simple HTML.`;
+            
+            const response = await callGeminiAPI(query, systemPrompt);
+            loadingDiv.classList.add('hidden');
+            outputDiv.innerHTML = response;
+        }
+
+        // --- AI Chat Assistant ---
+        const chatForm = document.getElementById('ai-chat-form');
+        const chatInput = document.getElementById('ai-chat-input');
+        const chatWindow = document.getElementById('ai-chat-window');
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userMessage = chatInput.value;
+            if (!userMessage) return;
+            
+            appendChatMessage(userMessage, 'user');
+            chatInput.value = '';
+            const loadingEl = appendChatMessage('...', 'bot-loading');
+
+            const systemPrompt = "You are a friendly Hindi study assistant. Answer questions about Hindi grammar, translations, or word meanings concisely. Keep replies short and helpful for a student.";
+            const botMessage = await callGeminiAPI(userMessage, systemPrompt);
+            
+            chatWindow.removeChild(loadingEl);
+            appendChatMessage(botMessage, 'bot');
+        });
+
+        function appendChatMessage(message, sender) {
+            const messageEl = document.createElement('div');
+            messageEl.classList.add('flex', 'mb-3');
+            
+            if (sender === 'user') {
+                messageEl.classList.add('justify-end');
+                messageEl.innerHTML = `<div class="bg-blue-500 text-white p-3 rounded-lg max-w-xs"><p>${message}</p></div>`;
+            } else if (sender === 'bot') {
+                messageEl.classList.add('justify-start');
+                messageEl.innerHTML = `<div class="bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs"><p>${message}</p></div>`;
+            } else { // bot-loading
+                 messageEl.classList.add('justify-start');
+                 messageEl.innerHTML = `<div class="bg-gray-200 text-gray-800 p-3 rounded-lg"><div class="spinner-dark"></div></div>`;
+            }
+            chatWindow.appendChild(messageEl);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+            return messageEl;
+        }
+    </script>
+</body>
+</html>
