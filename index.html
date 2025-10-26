@@ -1949,7 +1949,7 @@
             button.disabled = true;
             button.innerHTML = spinnerSVG;
             
-            const apiKey = "";
+            const apiKey = "AIzaSyCv6lMDLZOD8tyP85cL8RRy68ZwniU8228";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
             const payload = {
                 contents: [{ parts: [{ text: textToSpeak }] }],
@@ -1997,7 +1997,7 @@
         const translationCache = new Map();
 
         async function callGeminiAPI(userQuery, systemPrompt) {
-            const apiKey = "";
+            const apiKey = "AIzaSyCv6lMDLZOD8tyP85cL8RRy68ZwniU8228";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
             const payload = {
                 contents: [{ parts: [{ text: userQuery }] }],
